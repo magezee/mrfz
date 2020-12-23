@@ -1,6 +1,6 @@
 // src/Views/index.ts
-import Home from './Home';
+import Index from './Index/index';
 
 export {
-    Home,
+    Index,
 }

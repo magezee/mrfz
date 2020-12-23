@@ -1,14 +1,16 @@
+// src/App.tsx
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 
-import { Home } from './Views';
+import { Index } from './Views';
+import './style.scss';
 
-function App() {
+const App:React.FC = () => {
 	return (
 		<React.Fragment>
 			<BrowserRouter>
 				<Switch>
-					<Route component={Home} path='/index' exact />
+					<Route component={Index} path='/index' exact />
 					<Redirect to='/index' from='/' />
         		</Switch>
 			</BrowserRouter>

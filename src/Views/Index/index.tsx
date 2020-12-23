@@ -1,10 +1,12 @@
-// src/Views/Home/index.tsx
+// src/Views/Index/index.tsx
 import React from 'react';
 
-function Home() {
+import {Header} from '../../Components';
+
+const Index:React.FC = () => {
 	return (
 		<React.Fragment>
-			<header id="header">头栏</header>
+			<Header/>
 			<div className="section">首页</div>
 			<div className="section">情报</div>
 			<div className="section">干员</div>
@@ -15,4 +17,4 @@ function Home() {
 	);
 }
 
-export default Home;
+export default Index;

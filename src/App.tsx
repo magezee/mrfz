@@ -5,14 +5,14 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { Index } from './Views';
 import './style.scss';
 
-const App:React.FC = () => {
+const App: React.FC = () => {
 	return (
 		<React.Fragment>
 			<BrowserRouter>
 				<Switch>
 					<Route component={Index} path='/index' exact />
 					<Redirect to='/index' from='/' />
-        		</Switch>
+				</Switch>
 			</BrowserRouter>
 		</React.Fragment>
 	);

@@ -1,3 +1,129 @@
-#header {
+// src/Components/Header/style.scss
+
+/* 导航栏总容器样式 */
+.header {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: 0;
+	z-index: 9990;
+	opacity: 0;
+	transition: all ease-in-out .3s;
+}
+
+.ready .header {
+	opacity: 1;
+	filter: none;
+}
+
+
+/* a标签容器样式 */
+a {
+	background-color: transparent;
+
+	&:active,
+	&:hover {
+		outline: 0;
+	}
+}
+
+.button-menu {
+	width: 2em;
+	height: 2em;
+	padding: .5em;
+	margin: .5em;
+	display: block;
+	position: relative;
+	float: left;
+
+	/* 横线样式 */
+	.button-bar {
+		position: absolute;
+		top: 50%;
+		width: 2em;
+		height: .2em;
+		background-color: #fff;
+		text-indent: 101%;
+		white-space: nowrap;
+		overflow: hidden;
+		transition: all ease-in-out .3s;
+
+		/* 未展开的横线样式 */
+		&:nth-child(1) {
+			left: .5em;
+			transform-origin: right center;
+			transform: translate(0, -.5em);
+		}
+
+		&:nth-child(2) {
+			transform: none;
+		}
+
+		&:nth-child(3) {
+			right: .5em;
+			transform-origin: left center;
+			transform: translate(0, .5em);
+		}
+	}
+
+	/* 展开样式 */
+	&.expanded {
+		.button-bar {
+			&:nth-child(1) {
+				width: 1em;
+				transform: translate(0, 0) rotateZ(45deg);
+			}
+
+			&:nth-child(2) {
+				transform: rotateZ(-45deg);
+			}
+
+			&:nth-child(3) {
+				width: 1em;
+				transform: translate(0, 0) rotateZ(45deg);
+			}
+		}
+	}
+}
+
+/* 导航栏内容样式 */
+.header-menu {
+	position: absolute;
+	left: 0;
+	top: 4em;
+	width: 16em;
+
+	.nav-links {
+		margin: 0;
+		margin-left: 1em;
+		padding: 0;
+		border-left: .1em solid #999;
+		list-style: none;
+
+		.nav-link {
+			margin-left: 1em;
+			line-height: 2em;
+			padding: 1.5em 1.5em 1.5em 0;
+			background-color: rgba(0, 0, 0, .9);
+			overflow: hidden;
+			display: block;
+			box-sizing: border-box;
+			color: #fff;
+			text-decoration: none;
+			position: relative;
+
+			.nav-link-name-e {
+				position: absolute;
+				left: 0;
+				top: .575em;
+				font-size: 3em;
+				text-transform: uppercase;
+				color: rgba(102, 102, 102, .1);
+				font-family: HelveticaInserat, sans-serif;
+				white-space: nowrap;
+			}
+		}
+	}
 
 }

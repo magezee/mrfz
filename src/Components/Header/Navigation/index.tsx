@@ -1,30 +1,30 @@
 // src/Components/Header/Navigation/index.tsx
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import classnames from 'classnames';
 
 import NavContent from './NavContent';
 
-const Navigation:React.FC = () => {
-    const [isExpanded, switchState] = useState(false);
+const Navigation: React.FC = () => {
+	const [isExpanded, switchState] = useState(true);
 
-    const menuClass = classnames({
-        'button-menu': true,
-        'collapsed': !isExpanded,
-        'expanded': isExpanded,
-    });
+	// 根据isExpanded的状态更改a标签类名
+	const statusClass = classnames({
+		'collapsed': !isExpanded,
+		'expanded': isExpanded,
+	});
 
-    return (
-        <React.Fragment>
-            <div className="header collapsed">
-                <a href="javascript:" className={menuClass}>
-                    <span className="button-bar"></span>
-                    <span className="button-bar"></span>
-                    <span className="button-bar"></span>
-                </a>
-                { isExpanded ? <NavContent/> : null }
-            </div>
-        </React.Fragment>
-    );
+	return (
+		<React.Fragment>
+			<div className={classnames('header', statusClass)}>
+				<a href="javascript:" className={classnames('button-menu', statusClass)}>
+					<span className="button-bar"></span>
+					<span className="button-bar"></span>
+					<span className="button-bar"></span>
+				</a>
+				{isExpanded ? <NavContent /> : null}
+			</div>
+		</React.Fragment>
+	);
 }
 
 export default Navigation;

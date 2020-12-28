@@ -13,9 +13,13 @@ const Navigation: React.FC = () => {
 		'expanded': isExpanded,
 	});
 
+	const updataNavStatus = () => {
+		switchState(!isExpanded)
+	}
+
 	return (
 		<React.Fragment>
-			<div className={classnames('header', statusClass)}>
+			<div className={classnames('header', statusClass)} onClick={updataNavStatus}>
 				<a href="javascript:" className={classnames('button-menu', statusClass)}>
 					<span className="button-bar"></span>
 					<span className="button-bar"></span>

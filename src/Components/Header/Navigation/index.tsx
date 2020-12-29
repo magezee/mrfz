@@ -6,6 +6,7 @@ import NavContent from './NavContent';
 
 const Navigation: React.FC = () => {
 	const [isExpanded, switchState] = useState(true);
+	const [curIndex, switchIndex] = useState(0);
 
 	// 根据isExpanded的状态更改a标签类名
 	const statusClass = classnames({
@@ -13,8 +14,19 @@ const Navigation: React.FC = () => {
 		'expanded': isExpanded,
 	});
 
-	const updataNavStatus = () => {
-		switchState(!isExpanded)
+	/* 点击切换状态事件 */
+	const updataNavStatus = (event:any) => {
+		
+		switchState(!isExpanded);
+
+		// 通过事件委托来查出点击的a元素是父元素的子元素下标
+		const curEleChilds = event.target.parentNode.childNodes;
+		if(curEleChilds[0].getAttribute('class') === 'nav-link-name-e') {
+			const curElement =event.target.parentNode;
+			const nodeArr : Array<HTMLElement> = Array.from(curElement.parentNode.childNodes);
+			const curEleIndex = nodeArr.indexOf(curElement);
+			switchIndex(() => curEleIndex);
+		}
 	}
 
 	return (
@@ -25,7 +37,7 @@ const Navigation: React.FC = () => {
 					<span className="button-bar"></span>
 					<span className="button-bar"></span>
 				</a>
-				{isExpanded ? <NavContent /> : null}
+				{isExpanded ? <NavContent currentIndex={curIndex} /> : null}
 			</div>
 		</React.Fragment>
 	);

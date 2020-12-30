@@ -5,8 +5,9 @@ import classnames from 'classnames';
 import NavContent from './NavContent';
 
 const Navigation: React.FC = () => {
-	const [isExpanded, switchState] = useState(true);
-	const [curIndex, switchIndex] = useState(0);
+	const [isExpanded, switchState] = useState(true);				// 展开/收缩状态
+	const [curIndex, switchIndex] = useState(0);						// 点击导航内容下标
+	const [isDuringDelay,controlDelay] = useState(false);		// 开启/关闭延时状态
 
 	// 根据isExpanded的状态更改a标签类名
 	const statusClass = classnames({
@@ -16,7 +17,8 @@ const Navigation: React.FC = () => {
 
 	/* 点击切换状态事件 */
 	const updataNavStatus = (event:any) => {
-		
+		// 更改展开/收缩状态，开启延时
+		controlDelay(() => true);
 		switchState(!isExpanded);
 
 		// 通过事件委托来查出点击的a元素是父元素的子元素下标
@@ -27,6 +29,12 @@ const Navigation: React.FC = () => {
 			const curEleIndex = nodeArr.indexOf(curElement);
 			switchIndex(() => curEleIndex);
 		}
+
+		// 延时打开/关闭NavContent
+		setTimeout(() => {
+			controlDelay(() => false);
+		},300)
+
 	}
 
 	return (
@@ -37,7 +45,14 @@ const Navigation: React.FC = () => {
 					<span className="button-bar"></span>
 					<span className="button-bar"></span>
 				</a>
-				{isExpanded ? <NavContent currentIndex={curIndex} /> : null}
+
+				{/*	打开时立即打开，关闭时延时关闭 */}
+				{isExpanded 
+					? 
+						<NavContent  isExpanded={isExpanded} isDuringDelay={isDuringDelay} currentIndex={curIndex} /> 
+					: 
+						isDuringDelay ? <NavContent  isExpanded={isExpanded} isDuringDelay={isDuringDelay} currentIndex={curIndex} />  : null
+				}
 			</div>
 		</React.Fragment>
 	);

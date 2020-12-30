@@ -3,12 +3,23 @@ import React from 'react';
 import classnames from 'classnames';
 
 interface NavContentProps {
+	isExpanded:boolean;
+	isDuringDelay : boolean;
 	currentIndex : number;
 }
 
-const NavContent: React.FC<NavContentProps> = ({currentIndex}) => {
+
+
+const NavContent: React.FC<NavContentProps> = ({isExpanded,isDuringDelay,currentIndex}) => {
+	// 控制延时过程中的class
+	const menuClass = classnames({
+		"header-menu": true,
+		"header-menu-leave-active header-menu-leave-to": !isExpanded && isDuringDelay,
+		"header-menu-enter-active header-menu-enter-to": isExpanded && isDuringDelay,
+	})
+
 	return (
-		<div className="header-menu">
+		<div className={menuClass}>
 			<nav className="nav-links">
 				<a href="/index#!title" className={classnames('nav-link',{'current': currentIndex === 0})}>
 					<span className="nav-link-name-e">Home</span>

@@ -166,4 +166,21 @@ a {
 		}
 	}
 
+
+
 }
+	/* 延时动画 */
+	 
+	.header-menu-leave-to {
+		opacity: 0;
+		transform: translateY(-100%);
+	}
+	.header-menu-enter-to {
+		opacity: 0;
+		transform: translateY(100%);
+	}
+
+	.header-menu-enter-active,
+	.header-menu-leave-active {
+		transition: all ease-in-out .3s;
+	}

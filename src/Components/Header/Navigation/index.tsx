@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import NavContent from './NavContent';
 
 const Navigation: React.FC = () => {
-	const [isExpanded, switchState] = useState(true);				// 展开/收缩状态
+	const [isExpanded, switchState] = useState(false);				// 展开/收缩状态
 	const [curIndex, switchIndex] = useState(0);						// 点击导航内容下标
 	const [isDuringDelay,controlDelay] = useState(false);		// 开启/关闭延时状态
 
@@ -17,24 +17,26 @@ const Navigation: React.FC = () => {
 
 	/* 点击切换状态事件 */
 	const updataNavStatus = (event:any) => {
-		// 更改展开/收缩状态，开启延时
-		controlDelay(() => true);
-		switchState(!isExpanded);
+		// 这里使用一个控制开关达到节流的效果，即用户必须等待延时结束继续点击才有效
+		if(!isDuringDelay) {
+			// 更改展开/收缩状态，开启延时
+			controlDelay(() => true);
+			switchState(!isExpanded);
 
-		// 通过事件委托来查出点击的a元素是父元素的子元素下标
-		const curEleChilds = event.target.parentNode.childNodes;
-		if(curEleChilds[0].getAttribute('class') === 'nav-link-name-e') {
-			const curElement =event.target.parentNode;
-			const nodeArr : Array<HTMLElement> = Array.from(curElement.parentNode.childNodes);
-			const curEleIndex = nodeArr.indexOf(curElement);
-			switchIndex(() => curEleIndex);
+			// 通过事件委托来查出点击的a元素是父元素的子元素下标
+			const curEleChilds = event.target.parentNode.childNodes;
+			if(curEleChilds[0].getAttribute('class') === 'nav-link-name-e') {
+				const curElement =event.target.parentNode;
+				const nodeArr : Array<HTMLElement> = Array.from(curElement.parentNode.childNodes);
+				const curEleIndex = nodeArr.indexOf(curElement);
+				switchIndex(() => curEleIndex);
+			}
+
+			// 延时打开/关闭NavContent
+			setTimeout(() => {
+				controlDelay(() => false);
+			},300)
 		}
-
-		// 延时打开/关闭NavContent
-		setTimeout(() => {
-			controlDelay(() => false);
-		},300)
-
 	}
 
 	return (

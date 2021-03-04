@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { Index } from './Views';
 import './style.scss';
 
+
 const App: React.FC = () => {
 	return (
 		<React.Fragment>
